@@ -185,10 +185,15 @@ func ParseLogFile(fname string, aggregation Aggregation, maxDataPoints uint, tim
 
       byDirection[idx] = make(LogMetrics, len(cacheAggregationData))
       for i := range cacheAggregationData {
-        newMetric := aggregation.convert(&cacheAggregationData[i])
-        // set newMetric time based on the point and interval
-        newMetric.Time = uint(i) * interval
-        byDirection[idx][i] = &newMetric
+        metric := &cacheAggregationData[i]
+
+        // fix out of range if datapoint has no metrics
+        if len(*metric) > 0 {
+          newMetric := aggregation.convert(metric)
+          // set newMetric time based on the point and interval
+          newMetric.Time = uint(i) * interval
+          byDirection[idx][i] = &newMetric
+        }
       }
     }
   }
