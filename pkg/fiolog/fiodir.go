@@ -1,10 +1,10 @@
 package fiolog
 
 import (
-  "os"
-  "strings"
   "fmt"
+  "os"
   "path/filepath"
+  "strings"
 )
 
 // FioPathHandler provides handy mechanism to fio log paths

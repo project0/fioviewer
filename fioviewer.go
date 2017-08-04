@@ -4,34 +4,34 @@
 package main
 
 import (
-  "flag"
+	"flag"
 
-  gin "gopkg.in/gin-gonic/gin.v1"
+	gin "gopkg.in/gin-gonic/gin.v1"
 
-  "github.com/project0/fioviewer/pkg/fiolog"
-  "github.com/project0/fioviewer/pkg/api"
+	"github.com/project0/fioviewer/pkg/api"
+	"github.com/project0/fioviewer/pkg/fiolog"
 )
 
 func main() {
 
-  dir := flag.String("dir", ".", "Path to the fio log files")
-  listen := flag.String("listen", ":8080", "Listen to this ip:port")
-  staticDir := flag.String("static", ".", "Path to the static (dist) files of the WebUI")
+	dir := flag.String("dir", ".", "Path to the fio log files")
+	listen := flag.String("listen", ":8080", "Listen to this ip:port")
+	staticDir := flag.String("static", ".", "Path to the static (dist) files of the WebUI")
 
-  flag.Parse()
+	flag.Parse()
 
-  fiolog.Register(dir)
+	fiolog.Register(dir)
 
-  gin.SetMode(gin.DebugMode)
-  router := gin.Default()
+	gin.SetMode(gin.DebugMode)
+	router := gin.Default()
 
-  // Serve static files for UI components.
-  router.StaticFile("/index.html", *staticDir+"/index.html")
-  router.StaticFile("/", *staticDir+"/index.html")
-  router.Static("/static/", *staticDir+"/static/")
+	// Serve static files for UI components.
+	router.StaticFile("/index.html", *staticDir+"/index.html")
+	router.StaticFile("/", *staticDir+"/index.html")
+	router.Static("/static/", *staticDir+"/static/")
 
-  // add api routes
-  api.Register(router)
+	// add api routes
+	api.Register(router)
 
-  router.Run(*listen)
+	router.Run(*listen)
 }

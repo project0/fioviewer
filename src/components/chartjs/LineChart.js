@@ -63,20 +63,13 @@ export default Vue.extend({
                 'hour': 'H:mm [h]'
               }
             }
-          }]
-        },
-        yAxes: [{
-          ticks: {
-            beginAtZero: false,
-            callback: function (value, index, values) {
-              return value + ' KiB'
+          }],
+          yAxes: [{
+            gridLines: {
+              display: true
             }
-          },
-          gridLines: {
-            display: true
-          },
-          format: 'SSS [ms]'
-        }]
+          }]
+        }
       }
     }
   },

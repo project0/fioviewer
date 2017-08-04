@@ -34,7 +34,7 @@
               </label>
             </div>
 
-            Start offset: <input class="form-control" type="text" v-model="range.start">
+            Start offset: <input class="form-control" type="text" v-model="range.start"> End <input class="form-control" type="text" v-model="range.end">
             <hr>
             <div v-for="n, i in files">
               <select class="custom-select" v-model.trim="files[i]">
@@ -85,6 +85,9 @@
             yAxes: [
               {
                 ticks: {
+                  min: 0,
+                  suggestedMin: 0,
+                  beginAtZero: true,
                   callback: function (label, index, labels) {
                     return label
                   }
